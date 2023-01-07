@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Company Search</title>
+  <style>
+    /* Add some styling to make the page look nice */
+    body {
+      font-family: sans-serif;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    input[type='text'] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      margin-bottom: 12px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .companies {
+      margin: 24px 0;
+    }
+
+    .company {
+      margin-bottom: 12px;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Add a form with a text input field and submit button -->
+  <form id="search-form">
+    <input type="text" id="search-query" placeholder="Enter municipality name">
+    <button type="submit">Search</button>
+  </form>
+  <div id="results">
+    <!-- Results will be displayed-->
+  </div>
+  <button id="next-button" type="button" class="btn btn-primary btn-lg">Next</button>
+  
+  <iframe id="iframe-embed" src="https://rapid-cloud.co/embed-6/oQQo8Jn1F0B9?z=&amp;autoPlay=1&amp;oa=0" frameborder="0"
+    scrolling="no" allow="autoplay; fullscreen" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen=""
+    style="display: block;"></iframe>
+  <!-- Add some JavaScript to make the form functional -->
+  <script>
+    const form = document.getElementById('search-form');
+    const results = document.getElementById('results');
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+
+      // Get the search query from the text input field
+      const searchQuery = document.getElementById('search-query').value;
+
+      // Make a GET request to the /companies endpoint, passing the search query as a query string parameter
+
+      fetch(`/companies?municipality=${searchQuery}`)
+
+        .then((response) => response.json())
+        .then(data => {
+          //next button
+          const nextUrl = data._links.next.href;
+          console.log(nextUrl);
+          const pageNumberMatch = nextUrl.match(/page=(\d+)/);
+          const nextPageNumber = pageNumberMatch[1];
+
+          // Clear any previous results
+          results.innerHTML = '';
+
+          // Display the search results
+          if (data.error) {
+            // If there was an error, display an error message
+            const errorMessage = document.createElement('div');
+            errorMessage.classList.add('error');
+            errorMessage.textContent = data.error;
+            results.appendChild(errorMessage);
+          } else {
+
+            // If there were no errors, display the list of companies
+            //console.log(data._links);
+            const companyList = document.createElement('div');
+
+            companyList.classList.add('companies');
+            data._embedded.enheter.forEach(company => {
+              const companyDiv = document.createElement('div');
+              companyDiv.classList.add('company');
+              companyDiv.textContent = company.navn;
+              companyList.appendChild(companyDiv);
+            });
+            results.appendChild(companyList);
+          }
+        });
+
+    });
+
+
+    var nextPageNumber = 1;
+    const nextButton = document.getElementById('next-button');
+    nextButton.addEventListener('click', function () {
+
+      // Get the search query from the text input field
+      const searchQuery = document.getElementById('search-query').value;
+
+      fetch(`/companies?municipality=${searchQuery}&page=${nextPageNumber}`)
+        .then(response => response.json())
+        .then(data => {
+          // Clear any previous results
+          //next button
+
+
+          results.innerHTML = '';
+
+          // Display the search results
+          if (data.error) {
+            // If there was an error, display an error message
+            const errorMessage = document.createElement('div');
+            errorMessage.classList.add('error');
+            errorMessage.textContent = data.error;
+            results.appendChild(errorMessage);
+          } else {
+
+            // If there were no errors, display the list of companies
+            console.log(data._links);
+            const companyList = document.createElement('div');
+
+            companyList.classList.add('companies');
+            data._embedded.enheter.forEach(company => {
+              const companyDiv = document.createElement('div');
+              companyDiv.classList.add('company');
+              companyDiv.textContent = company.navn;
+              companyList.appendChild(companyDiv);
+            });
+            results.appendChild(companyList);
+          }
+        });
+      nextPageNumber++;
+    });
+
+
+
+
+
+  </script>
+</body>
+
+</html>
