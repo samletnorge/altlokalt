@@ -22,8 +22,6 @@ app.get("/", function(req, res) {
     res.render(__dirname + "/src/index.ejs");
 })
 
-
-
 //about
 app.get("/about", function(req, res) {
     res.render(__dirname + "/src/about.ejs");
@@ -37,7 +35,7 @@ app.get("/deals", function(req, res) {
 app.get("/reservation", function(req, res) {
     res.render(__dirname + "/src/reservation.ejs");
 })
-app.get('/ass', function (req, res) {
+app.get('/bedrift', function (req, res) {
     res.render(__dirname + "/src/company.ejs");
 });
 
@@ -70,7 +68,7 @@ app.get('/companies', (req, res) => {
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-    port = 3000;
+    port = 6051;
 }
 
 app.listen(port, function(req, res) {
