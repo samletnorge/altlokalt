@@ -3,6 +3,7 @@
 
 <head>
   <title>Company Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     /* Add some styling to make the page look nice */
     body {
@@ -13,25 +14,33 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 300px;
+      width: 100%;
       margin: 0 auto;
     }
 
     input[type='text'] {
-      width: 100%;
+      width: 90%;
       padding: 12px;
       border: 1px solid #ccc;
       margin-bottom: 12px;
+      margin-top: 30px;
     }
 
     button {
-      width: 100%;
+      width: 20%;
       padding: 12px;
       background-color: #4caf50;
       color: white;
       border: none;
       cursor: pointer;
+      margin-top: 20px; 
     }
+      
+    #next-button{
+          width: 20%;
+                  
+      }
+      
 
     .companies {
       margin: 24px 0;
@@ -50,17 +59,16 @@
 <body>
   <!-- Add a form with a text input field and submit button -->
   <form id="search-form">
-    <input type="text" id="search-query" placeholder="Enter municipality name">
-    <button type="submit">Search</button>
+    <input type="text" id="search-query" placeholder="skriv en by ...">
+    <button type="submit">Søk</button>
   </form>
-  <div id="results">
+    <center>
+    <div id="results">
     <!-- Results will be displayed-->
   </div>
-  <button id="next-button" type="button" class="btn btn-primary btn-lg">Next</button>
+  <button id="next-button">Neste</button>
+    </center>
   
-  <iframe id="iframe-embed" src="https://rapid-cloud.co/embed-6/oQQo8Jn1F0B9?z=&amp;autoPlay=1&amp;oa=0" frameborder="0"
-    scrolling="no" allow="autoplay; fullscreen" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen=""
-    style="display: block;"></iframe>
   <!-- Add some JavaScript to make the form functional -->
   <script>
     const form = document.getElementById('search-form');
@@ -105,6 +113,7 @@
               const companyDiv = document.createElement('div');
               companyDiv.classList.add('company');
               companyDiv.textContent = company.navn;
+              console.log(JSON.stringify(company));
               companyList.appendChild(companyDiv);
             });
             results.appendChild(companyList);
@@ -148,12 +157,13 @@
               const companyDiv = document.createElement('div');
               companyDiv.classList.add('company');
               companyDiv.textContent = company.navn;
+              console.log(JSON.stringify(company));
               companyList.appendChild(companyDiv);
             });
             results.appendChild(companyList);
           }
         });
-      nextPageNumber++;
+        nextPageNumber++;
     });
 
 
@@ -164,3 +174,7 @@
 </body>
 
 </html>
+
+
+
+
