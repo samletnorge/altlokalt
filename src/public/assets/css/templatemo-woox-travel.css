@@ -165,7 +165,29 @@ body {
   overflow: hidden;
 }
 
+.border-button button {
+  font-size: 14px;
+  color: #22b3c1;
+  background-color: transparent;
+  border: 1px solid #22b3c1;
+  padding: 12px 30px;
+  display: inline-block;
+  border-radius: 25px;
+  font-weight: 500;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
 .border-button a:hover {
+  background-color: #22b3c1;
+  color: #fff;
+}
+
+.border-buttonbutton {
   background-color: #22b3c1;
   color: #fff;
 }
@@ -1867,8 +1889,15 @@ Deals Page Style
   border-color: #fff;
   color: #fff;
 }
+.page-heading .border-button button {
+  border-color: #fff;
+  color: #fff;
+}
 
 .page-heading .border-button a:hover {
+  border-color: #22b3c1;
+}
+.page-heading .border-button button:hover {
   border-color: #22b3c1;
 }
 
@@ -1984,6 +2013,7 @@ Deals Page Style
 .amazing-deals ul.page-numbers {
   text-align: center;
   margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .amazing-deals ul.page-numbers li {
