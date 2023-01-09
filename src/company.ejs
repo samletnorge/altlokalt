@@ -99,10 +99,11 @@
             results.appendChild(errorMessage);
           } else {
             // If there were no errors, display the list of companies
-            console.log(data._embedded.enheter);
+            //console.log(data._embedded.enheter);
             const companyList = document.createElement('div');
             companyList.classList.add('row');
             data._embedded.enheter.forEach(company => {
+              //console.log(company.organisasjonsnummer);
               // Create a new card element for each company
               const card = document.createElement('div');
               card.classList.add('col-lg-6', 'col-sm-6');
@@ -130,14 +131,17 @@
                 </div>
                 <p>${company.naeringskode1.beskrivelse}</p>
                 <div class="main-button">
-                  <a href="reservation">Se mer</a>
+                  <a href="detail" Id="company-query" value="${company.organisasjonsnummer}">Se mer</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       `;
-
+              console.log("org no", company.organisasjonsnummer);
+              // Set the value in the first HTML file
+              localStorage.setItem("organisasjonsnummer", company.organisasjonsnummer);
+              
               // Add the card to the company list
               companyList.appendChild(card);
             });

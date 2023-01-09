@@ -62,7 +62,27 @@ app.get('/companies', (req, res) => {
 
   request(options)
     .then(response => {
-      console.log(response._embedded.enheter[0].navn);
+      console.log(response._embedded.enheter[0]._links);
+      res.send(response);
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).send({ error: 'An error occurred while retrieving the companies' });
+    });
+
+});
+app.get('/company', (req, res) => {
+  const organisasjonsnummer = req.query.organisasjonsnummer;
+
+  const options_single = {
+    method: 'GET',
+    uri: 'https://data.brreg.no/enhetsregisteret/api/enheter/' + organisasjonsnummer,
+    json: true
+  };
+
+    request(options_single)
+    .then(response => {
+      //console.log(response.navn);
       res.send(response);
     })
     .catch(error => {
@@ -70,7 +90,6 @@ app.get('/companies', (req, res) => {
       res.status(500).send({ error: 'An error occurred while retrieving the companies' });
     });
 });
-
 
 let port = process.env.PORT;
 if (port == null || port == "") {

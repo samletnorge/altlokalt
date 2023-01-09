@@ -14,7 +14,7 @@
 
     <link rel="icon" type="image/png" href="<?php echo asset( 'img', 'favicon.png' ); ?>" />
     <link rel="stylesheet" href="assets/css/company-detail.css">
-    
+
     <script src='https://www.google.com/recaptcha/api.js'></script>
 
 </head>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="flex-grow flex-col space-around">
                         <div>
-                            <h1>Alexander Demchak</h1>
+                            <h1 id="enhet_navn">Alexander Demchak</h1>
                             <span class="handle">@Xhynk</span>
                             <span class="title">Lead Software Developer</span>
                         </div>
@@ -148,9 +148,7 @@
                 <section id="about" class="grid columns-2 no-gap">
                     <header class="span-all flex space-between">
                         <h2>About</h2>
-                        <a href="https://whirlocal.io/company/xhynk/?_wl=186" target="_blank"><img
-                                class="whirlocal-badge" id="social-proof-badge" alt="Current Aggregate Score for Xhynk"
-                                src="https://whirlocal.io/image-gen/badges/social-proof/?id=450181" /></a>
+
                     </header>
                     <div id="bio-intro"><strong>Howdy! I'm Alexander Demchak.</strong><br>I'm known colloquially online
                         as Xhynk (pronounced "zinc"). I've been a web developer since 2010, and now work mainly with PHP
@@ -791,9 +789,9 @@
                                     <textarea required name="message" id="message" rows="4"></textarea>
                                     <label for="message">Message</label>
                                 </div>
-                                <div class="field">
+                                <!-- <div class="field">
                                     <div class="g-recaptcha" data-sitekey=""></div>
-                                </div>
+                                </div> -->
                                 <div class="actions">
                                     <button name="submit" value="true" class="full">Send Message</button>
                                 </div>
@@ -931,6 +929,32 @@
                     class="silver">04</span><span class="bronze">18</span></span></a>
     </div>
     <script>
+        function load() {
+            // Get the value in the second HTML file
+            let organisasjonsnummer = localStorage.getItem("organisasjonsnummer");
+            console.log(organisasjonsnummer);
+            const enhet_navn = document.getElementById('enhet_navn');
+
+            const searchQuery = organisasjonsnummer;
+
+            // Make a GET request to the /companies endpoint, passing the search query as a query string parameter
+            fetch(`/company?organisasjonsnummer=${searchQuery}`)
+                .then((response) => response.json())
+                .then(data => {
+                    // Display the search results
+                    if (data.error) {
+                        console.log(data.error)
+                    } else {
+                        // If there were no errors, display the list of companies
+                        console.log(data.navn)
+                        enhet_navn.textContent = data.navn;
+
+                    }
+                });
+        }
+        load()
+
+
         function apiPromise(method, url, data) {
             return new Promise(function (resolve, reject) {
                 var request = new XMLHttpRequest();
