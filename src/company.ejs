@@ -1,0 +1,303 @@
+<%- include("header") -%>
+  <div class="page-heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h4>Se Bedrifter i lokale ditt;</h4>
+
+          <form id="search-form">
+            <h2>
+              <input class="form-control" aria-label="Search" type="text" id="search-query"
+                placeholder="skriv en by ...">
+            </h2>
+            <div class="border-button"><button type="submit">Søk</button></div>
+
+          </form>
+          <!-- Add a form with a text input field and submit button -->
+
+
+
+          <!-- Results will be displayed-->
+          <div class="amazing-deals">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                  <div class="section-heading text-center">
+                    <h2>Nede er lokalet bedrifter i byen din</h2>
+                    <p>Vi viser bare 90 bredrifter. Vil du se mer? <a href="deals">Klikk Her</a></p>
+                  </div>
+                </div>
+                <div id="results" class="container-fluid col-lg-12">
+
+                </div>
+                <div class="col-lg-12 row">
+                  <div class="border-button col" id="prev-button" style="margin-top: 30px; margin-bottom: 30px;"><a><i class="fa fa-arrow-left"></i></a></div>
+                  <!-- <ul class="page-numbers col">
+                    
+                    <li class="active page-numbers"><a href="#">1</a></li>
+                    <li class="page-numbers"><a href="#">2</a></li>
+                    <li class="page-numbers"><a href="#">3</a></li>
+                    <li class="page-numbers"><a href="#">4</a></li>
+                    <li class="page-numbers"><a href="#">5</a></li>
+                    <li class="page-numbers"><a href="#">6</a></li>
+                     <li class="page-numbers"><a href="#">7</a></li>
+                    <li class="page-numbers"><a href="#">8</a></li>
+                    <li class="page-numbers"><a href="#">9</a></li>
+                    <li class="page-numbers"><a href="#">10</a></li> -->
+                    <!-- <li class="page-numbers"><a href="#">3</a></li>
+                    <li class="page-numbers"><a href="#">2</a></li>
+                    <li class="page-numbers"><a href="#">3</a></li>
+                    <li class="page-numbers"><a href="#">2</a></li>
+                    <li class="page-numbers"><a href="#">3</a></li>
+                    <li class="page-numbers"><a href="#">2</a></li>
+                    <li class="page-numbers"><a href="#">3</a></li>
+
+
+                    <li class="page-numbers"><a href="#">2</a></li>
+                    <li class="page-numbers"><a href="#">3</a></li> 
+                    
+                  </ul> -->
+                  
+                  <div class="border-button col" id="next-button" style="margin-top: 30px; margin-bottom: 30px;"><a><i class="fa fa-arrow-right"></i></a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Add some JavaScript to make the form functional -->
+  <script>
+    const form = document.getElementById('search-form');
+    const results = document.getElementById('results');
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+
+      const searchQuery = document.getElementById('search-query').value;
+
+      // Make a GET request to the /companies endpoint, passing the search query as a query string parameter
+      fetch(`/companies?municipality=${searchQuery}`)
+        .then((response) => response.json())
+        .then(data => {
+          //next button
+
+          // Clear any previous results
+          results.innerHTML = '';
+
+          // Display the search results
+          if (data.error) {
+            // If there was an error, display an error message
+            const errorMessage = document.createElement('div');
+            errorMessage.classList.add('error');
+            errorMessage.textContent = data.error;
+            results.appendChild(errorMessage);
+          } else {
+            // If there were no errors, display the list of companies
+            //console.log(data._embedded.enheter);
+            const companyList = document.createElement('div');
+            companyList.classList.add('row');
+            data._embedded.enheter.forEach(company => {
+              //console.log(company.organisasjonsnummer);
+              // Create a new card element for each company
+              const card = document.createElement('div');
+              card.classList.add('col-lg-6', 'col-sm-6');
+              card.innerHTML = `
+        <div class="item col">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="image">
+                <img src="https://picsum.photos/id/870/720/1280?grayscale&blur=2" alt="">
+              </div>
+            </div>
+            <div class="col-lg-6 align-self-center">
+              <div class="content">
+                <a  target=”_blank” href="https://${company.hjemmeside}" class="info">${company.hjemmeside}</a>
+                <h4 style="color: black;">${company.navn}</h4>
+                <div class="row">
+                  <div class="col-6">
+                    <i class="fa fa-clock"></i>
+                    <span class="list">${company.registreringsdatoEnhetsregisteret}</span>
+                  </div>
+                  <div class="col-6">
+                    <i class="fa fa-map"></i>
+                    <span class="list">${company.postadresse.poststed}</span>
+                  </div>
+                </div>
+                <p>${company.naeringskode1.beskrivelse}</p>
+                <div class="main-button">
+                  <a href="detail" Id="company-query" value="${company.organisasjonsnummer}">Se mer</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+              console.log("org no", company.organisasjonsnummer);
+              // Set the value in the first HTML file
+              localStorage.setItem("organisasjonsnummer", company.organisasjonsnummer);
+              
+              // Add the card to the company list
+              companyList.appendChild(card);
+            });
+
+            // Add the company list to the results element
+            results.appendChild(companyList);
+          }
+        });
+    });
+
+    var PageNumber = 1;
+    const nextButton = document.getElementById('next-button');
+    const prevButton = document.getElementById('prev-button');
+
+    function load() {
+      // Get the search query from the text input field
+      const searchQuery = document.getElementById('search-query').value;
+
+      // Make a GET request to the /companies endpoint, passing the search query as a query string parameter
+      fetch(`/companies?municipality=${searchQuery}&page=${PageNumber}`)
+        .then((response) => response.json())
+        .then(data => {
+          //next button
+
+          // Clear any previous results
+          results.innerHTML = '';
+
+          // Display the search results
+          if (data.error) {
+            // If there was an error, display an error message
+            const errorMessage = document.createElement('div');
+            errorMessage.classList.add('error');
+            errorMessage.textContent = data.error;
+            results.appendChild(errorMessage);
+          } else {
+            // If there were no errors, display the list of companies
+            console.log(data._embedded.enheter);
+            const companyList = document.createElement('div');
+            companyList.classList.add('row');
+            data._embedded.enheter.forEach(company => {
+              // Create a new card element for each company
+              const card = document.createElement('div');
+              card.classList.add('col-lg-6', 'col-sm-6');
+              card.innerHTML = `
+  <div class="item col">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="image">
+          <img src="https://picsum.photos/id/870/720/1280?grayscale&blur=2" alt="">
+        </div>
+      </div>
+      <div class="col-lg-6 align-self-center">
+        <div class="content">
+          <a  target=”_blank” href="https://${company.hjemmeside}" class="info" >${company.hjemmeside}</a>
+          <h4 style="color: black;">${company.navn}</h4>
+          <div class="row">
+            <div class="col-6">
+              <i class="fa fa-clock"></i>
+              <span class="list">${company.registreringsdatoEnhetsregisteret}</span>
+            </div>
+            <div class="col-6">
+              <i class="fa fa-map"></i>
+              <span class="list">${company.postadresse.poststed}</span>
+            </div>
+          </div>
+          <p>${company.naeringskode1.beskrivelse}</p>
+          <div class="main-button">
+            <a href="reservation">Se mer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+              // Add the card to the company list
+              companyList.appendChild(card);
+            });
+
+            // Add the company list to the results element
+            results.appendChild(companyList);
+
+          }
+        });
+    }
+
+    nextButton.addEventListener('click', event => {
+      event.preventDefault();
+      // // Get the currently active page number element
+      // const activePageNumberElement = document.querySelector('.page-numbers .active');
+      // // If there is a next page number element
+      // if (activePageNumberElement.nextElementSibling) {
+      //   // Remove the "active" class from the current page number element
+      //   activePageNumberElement.classList.remove('active');
+
+      //   // Add the "active" class to the next page number element
+      //   activePageNumberElement.nextElementSibling.classList.add('active');
+
+      //   // Update the current page number
+      //   PageNumber = parseInt(activePageNumberElement.nextElementSibling.textContent);
+
+      //   // Update the displayed companies based on the current page number
+      //   load();
+      // }
+      PageNumber++;
+      load();
+
+    });
+    prevButton.addEventListener('click', event => {
+      event.preventDefault();
+      // // Get the currently active page number element
+      // const activePageNumberElement = document.querySelector('.page-numbers .active');
+      // // If there is a next page number element
+      // if (activePageNumberElement.previousElementSibling) {
+      //   // Remove the "active" class from the current page number element
+      //   activePageNumberElement.classList.remove('active');
+
+      //   // Add the "active" class to the next page number element
+      //   activePageNumberElement.previousElementSibling.classList.add('active');
+
+      //   // Update the current page number
+      //   PageNumber = parseInt(activePageNumberElement.previousElementSibling.textContent);
+
+      //   // Update the displayed companies based on the current page number
+      //   load();
+      // }
+      PageNumber--;
+      load();
+    });
+
+    // const pageNumberElements = document.querySelectorAll('.page-numbers');
+
+    // pageNumberElements.forEach(pageNumberElement => {
+      
+    //   pageNumberElement.addEventListener('click', event => {
+    //     event.preventDefault();
+
+    //     // Remove the "active" class from all page number elements
+    //     pageNumberElements.forEach(el => el.classList.remove('active'));
+
+    //     // Add the "active" class to the clicked page number element
+    //     pageNumberElement.classList.add('active');
+
+    //     // Update the current page number
+    //     PageNumber = parseInt(pageNumberElement.textContent);
+
+    //     // Update the displayed companies based on the current page number
+    //     load();
+    //   });
+    // });
+
+
+
+
+
+  </script>
+
+  <%- include("scripts") -%>
+    <%- include("footer") -%>
