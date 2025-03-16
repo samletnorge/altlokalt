@@ -1,0 +1,164 @@
+"Company" - This document type would contain information about the companies, including name, address, contact information, and a list of related documents (such as "Warehouse", "Supplier", "Available Positions", etc.).
+"Warehouse" - This document type would contain information about warehouses, including location, capacity, and a reference to the related "Company" document.
+"Sales" - This document type would contain information about sales, including the product or service being sold, the price, and a reference to the related "Company" document.
+"Supplier" - This document type would contain information about suppliers, including contact information and a list of products or services they provide, and a reference to the related "Company" document.
+"Available Positions" - This document type would contain information about available job positions, including the job title, responsibilities, and requirements, and a reference to the related "Company" document.
+"Clubs and Teams" - This document type would contain information about clubs and teams, including name, location, and contact information, and a reference to the related "Company" document.
+"Enterprises" - This document type would contain information about enterprises, including name, address, contact information, and a list of related documents (such as "Daughter Companies", "Business Group", "New Enterprises", etc.).
+"Daughter Companies" - This document type would contain information about daughter companies, including name, address, contact information, and a reference to the related "Enterprises" document.
+"Business Group" - This document type would contain information about business groups, including name, address, contact information, and a reference to the related "Enterprises" document.
+"New Enterprises" - This document type would contain information about new enterprises, including name, address, contact information, and a reference to the related "Enterprises" document.
+"Services" - This document type would contain information about services, including name, description, and contact information, and a reference to the related "Company" or "Enterprises" document.
+"Products" - This document type would contain information about products, including name, description, price, and a reference to the related "Company" or "Enterprises" document.
+"Online CV" - This document type would contain information about online CVs, including the person's name, contact information, and a list of their skills and experience, and a reference to the related "Company" or "Enterprises" document.
+"Influencer" - This document type would contain information about influencers, including name, contact information, and a list of their social media accounts, and a reference to the related "Company" or "Enterprises" document.
+"Consultant" - This document type would contain information about consultants, including name, contact information, and a list of their specializations, and a reference to the related "Company" or "Enterprises" document.
+"Freelancers" - This document type would contain information about freelancers, including name, contact information, and a list of their skills and experience, and a reference to the related "Company" or "Enterprises" document.
+"Coupons" - This document type would contain information about coupons, including the discount amount, expiration date, and a reference to the related "Company" or "Enterprises" document.
+offers: document type for special offers, with fields such as name, description, expiration date, etc.
+price_cuts: document type for price cuts, with fields such as original price, sale price, expiration date, etc.
+voluntary_work: document type for voluntary work opportunities, with fields such as name, description, qualifications, etc.
+joint_organizations: document type for joint organizations, with fields such as name, description, member organizations (a reference to the organizations document type), etc.
+new_companies: document type for new companies, with fields such as name, description, etc.
+start_ups: document type for start-ups, with fields such as name, description, funding, etc.
+counties: document type for counties, with fields such as name, population, etc.
+County Services: document type for services offered by the county government, such as education, healthcare, transportation, etc.
+Country: document type for country information, such as name, population, GDP, etc.
+Groceries: document type for grocery stores and supermarkets, with fields such as name, location, hours of operation, etc.
+Daily Necessities: document type for stores that sell everyday items such as clothing, electronics, household goods, etc.
+Hobbies: document type for stores that sell hobby-related items such as craft supplies, musical instruments, etc.
+
+
+
+
+Enthusiasts: document type for individuals or groups that share a common interest or hobby, with fields such as name, contact information, interests, etc.
+
+
+Online Shops: document type for e-commerce sites, with fields such as name, URL, product categories, etc.
+
+Advertisements: document type for ads, with fields such as title, description, image, etc.
+
+Branches: document type for branches of a company, with fields such as name, location, phone number, etc.
+
+This is a basic structure and you can always add more fields to better suit your needs. The important thing is to define the relations between these types, for example, a "Company" type would have a reference field linking to its "Daughter Company" type, and the "Online Shop" type would have a reference field linking to its "Product" type. Sanity Studio has a visual schema editor that makes it easy to create and modify your schema.
+
+
+
+
+
+
+Companies:
+link to "Daughter Company"
+link to "Warehouse"
+link to "Supplier"
+link to "Available Positions"
+link to "Business Group"
+
+Daughter Companies:
+link to "Parent Company"
+
+Warehouse:
+link to "Company"
+
+Sales:
+link to "Company"
+link to "Product"
+
+Supplier:
+link to "Company"
+link to "Product"
+
+Available Positions:
+link to "Company"
+
+Clubs and Teams:
+link to "Company"
+
+Enterprises:
+link to "Daughter Company"
+link to "Business Group"
+
+Daughter Companies:
+link to "Parent Company"
+
+Business Group:
+link to "Enterprise"
+link to "Daughter Company"
+
+New Enterprises:
+link to "Business Group"
+
+Services:
+link to "Company"
+
+Products:
+link to "Online Shop"
+link to "Supplier"
+
+Online CV:
+link to "Freelancer"
+
+Influencer:
+link to "Company"
+
+Consultant:
+link to "Company"
+
+Freelancer:
+link to "Online CV"
+
+Coupons:
+link to "Company"
+
+Offers:
+link to "Company"
+
+Price Cuts:
+link to "Company"
+
+Voluntary Work:
+link to "Company"
+
+Joint Organisations:
+link to "Company"
+
+New Companies:
+link to "Business Group"
+
+Start Ups:
+link to "Business Group"
+
+Counties:
+link to "County"
+
+County:
+link to "County Services"
+
+County Services:
+link to "County"
+
+Country:
+link to "Counties"
+
+Groceries:
+link to "Online Shop"
+
+Daily Necessities:
+link to "Online Shop"
+
+Hobbies:
+link to "Company"
+
+Enthusiasts:
+link to "Company"
+
+Online Shop:
+link to "Products"
+link to "Advertisment"
+
+Advertisment:
+link to "Online Shop"
+link to "Branches"
+
+Branches:
+link to "Advertisment"
