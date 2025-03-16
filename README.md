@@ -1,77 +1,91 @@
-### preequisite 
-ansible is only able to run on linux
-an S3 bucket with the correct name(same as in terraform/provider.tf in s3.bucket )
+# Getting Started with Create React App
 
-## Developing
-start a development server:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-```bash
-yarn dev
+## Available Scripts
 
-# or start the server and open the app in a new browser tab
-yarn dev -- --open
-```
+In the project directory, you can run:
 
-## Building
+### `npm start`
 
-To create a production version of your app:
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-```bash
-yarn build
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-or if you have docker installed
+### `npm test`
 
-docker-compose -f docker-compose.dev.yml up -d --build
-```
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-You can preview the production build with `yarn preview`.
-or if you used docker go to http://localhost:3000
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+### Docker
+docker build -t altlokalt-react .
+
+docker run -p 491:3000 altlokalt-react
 
 
-# deploy-nodeapp-terraform-ansible
+--to stop it open a new terminal in the same folder
 
-## Steps to deploy
-### Configure AWS 
-```hcl
-Replace this credentials in main.tf
+docker ps
 
-provider "aws" {
-  region     = "AWS_REGION"
-  access_key = "AWS_ACCESS_KEY"
-  secret_key = "AWS_SECRET_KEY"
-}
-```
+--youll get the name of the container here its keen_spence
+CONTAINER ID   IMAGE             COMMAND                  CREATED              STATUS              PORTS                    NAMES
+dee229cb1b3d   altlokalt-react   "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:3000->3000/tcp   keen_spence
+(base)
 
-## Command to execute
-### terraform
-```hcl
-terraform init
-```
+docker stop distracted_kirch
 
-```hcl
-terraform validate
-```
-
-```hcl
-terraform plan
-```
-
-```hcl
-terraform apply --auto-approve
-```
-
-### Destroy all resouces
-```hcl
-terraform destroy --auto-approve
-```
-
-### ansible
-```bash
-ansible-playbook -i 13.60.38.190, -e "ansible_user=ubuntu ansible_ssh_private_key_file=modules/pk/terraform-key.pem" ../ansible/deploy-app.yml
-ansible-playbook -i modules/ec2/dynamic_inventory.ini ../ansible/deploy-app.yml
-```
-
-https://www.youtube.com/watch?v=alAZl5udvAI
+--then go to local host 300
