@@ -60,8 +60,8 @@ importers:
         specifier: ^1.6.7
         version: 1.8.3
       marked:
-        specifier: ^9.1.4
-        version: 9.1.6
+        specifier: ^15.0.8
+        version: 15.0.8
       pocketbase:
         specifier: ^0.25.2
         version: 0.25.2
@@ -1389,9 +1389,9 @@ packages:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
     engines: {node: '>=8'}
 
-  marked@9.1.6:
-    resolution: {integrity: sha512-jcByLnIFkd5gSXZmjNvS1TlmRhCXZjIzHYlaGkPlLIekG55JDR2Z4va9tZwCiP+/RDERiNhMOFu01xd6O5ct1Q==}
-    engines: {node: '>= 16'}
+  marked@15.0.8:
+    resolution: {integrity: sha512-rli4l2LyZqpQuRve5C0rkn6pj3hT8EWPC+zkAxFTAJLxRbENfTAhEQq9itrmf1Y81QtAX5D/MYlGlIomNgj9lA==}
+    engines: {node: '>= 18'}
     hasBin: true
 
   math-intrinsics@1.1.0:
@@ -3377,7 +3377,7 @@ snapshots:
     dependencies:
       semver: 6.3.1
 
-  marked@9.1.6: {}
+  marked@15.0.8: {}
 
   math-intrinsics@1.1.0: {}
 
