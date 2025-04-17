@@ -35,16 +35,16 @@
     <meta property="og:title" content="{pageTitle} | ${$page.siteName}" />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={`https://${$page.url.host}/enheter`} />
-    <meta property="og:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${encodeURIComponent(pageTitle)}`} />
+    <meta property="og:image" content={`https://placehold.co/1200x628/4506CB/FFFFFF/?text=${encodeURIComponent(pageTitle)}`} />
     <meta property="og:site_name" content=${$page.siteName} />
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:title" content="{pageTitle} | ${$page.siteName}" />
     <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${encodeURIComponent(pageTitle)}`} />
+    <meta name="twitter:image" content={`https://placehold.co/1200x628/4506CB/FFFFFF/?text=${encodeURIComponent(pageTitle)}`} />
 
     <!-- Schema.org for Google -->
     <meta itemprop="name" content="{pageTitle} | ${$page.siteName}" />
     <meta itemprop="description" content={pageDescription} />
-    <meta itemprop="image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${encodeURIComponent(pageTitle)}`} />
+    <meta itemprop="image" content={`https://placehold.co/1200x628/4506CB/FFFFFF/?text=${encodeURIComponent(pageTitle)}`} />
 </svelte:head>

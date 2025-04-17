@@ -37,7 +37,7 @@
 			<img
 				src={blog?.image
 					? getImageURL(blog.collectionId, blog.id, blog.image, '80x80')
-					: `https://via.placeholder.com/80/4506CB/FFFFFF/?text=${blog.title}`}
+					: `https://placehold.co/80/4506CB/FFFFFF/?text=${blog.title}`}
 				alt="{blog.image} blog image"
 			/>
 		</div>

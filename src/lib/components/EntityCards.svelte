@@ -27,7 +27,7 @@
 		<div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
 			<!-- entity Card Component -->
 			<div class="bg-primary border rounded-lg p-4 shadow-md hover:shadow-lg text-primary-content">
-				<img src={`https://via.placeholder.com/500/4506CB/FFFFFF/?text=${entity.navn}`} alt={entity.navn} class="w-full h-48 object-cover rounded-lg">
+				<img src={`https://placehold.co/500/4506CB/FFFFFF/?text=${entity.navn}`} alt={entity.navn} class="w-full h-48 object-cover rounded-lg">
 				<h2 class="text-xl font-bold mt-4">
 					<a href={`/enheter/${entity.organisasjonsnummer}`} class="hover:cursor-pointer hover:underline hover:text-warning">
 					{entity.navn}
@@ -36,7 +36,7 @@
 				<p class="text-sm mt-2">{entity.naeringkode1?.beskrivelse ?? entity.institusjonellSektorkode?.beskrivelse}</p>
 				<div class="flex items-center justify-between mt-4">
 					<div class="flex items-center">
-						<img src={`https://via.placeholder.com/500/4506CB/FFFFFF/?text=${entity.navn}`} alt={entity.navn + " logo på altlokalt.no"} class="w-8 h-8 rounded-full object-cover">
+						<img src={`https://placehold.co/500/4506CB/FFFFFF/?text=${entity.navn}`} alt={entity.navn + " logo på altlokalt.no"} class="w-8 h-8 rounded-full object-cover">
 						<p class="ml-2 text-sm hover:underline hover:text-warning">{entity.organisasjonsform.beskrivelse}</p>
 					</div>
 					<div class="flex items-center">

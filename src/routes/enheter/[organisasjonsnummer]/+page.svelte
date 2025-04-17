@@ -35,7 +35,7 @@
 				<div class="relative bg-base-100 w-full mb-6 shadow-xl rounded-lg">
 					<div class="px-6 py-4">
 						<div class="flex items-center justify-between">
-							<img alt="Profile Avatar" src={`https://via.placeholder.com/600x600/4506CB/FFFFFF/?text=${company.navn}`} class="rounded-full h-20 w-20 object-cover" />
+							<img alt="Profile Avatar" src={`https://placehold.co/600x600/4506CB/FFFFFF/?text=${company.navn}`} class="rounded-full h-20 w-20 object-cover" />
                             <!-- Website -->
                             {#if company.hjemmeside}
                                 <div class="mt-4">
@@ -134,16 +134,16 @@
     <meta property="og:title" content={`${company.navn} | ${$page.siteName}`} />
     <meta property="og:description" content={$_('page.enheter_organisasjonsnummer.description', { companyName: company.navn })} />
     <meta property="og:url" content={`https://${$page.url.origin}/enheter/${company.organisasjonsnummer}`} />
-    <meta property="og:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`} />
+    <meta property="og:image" content={`https://placehold.co/1200x628/4506CB/FFFFFF/?text=${company.navn}`} />
     <meta property="og:site_name" content={$page.siteName} />
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:title" content={`${company.navn} | ${$page.siteName}`} />
     <meta name="twitter:description" content={$_('page.enheter_organisasjonsnummer.description', { companyName: company.navn })} />
-    <meta name="twitter:image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`} />
+    <meta name="twitter:image" content={`https://placehold.co/1200x628/4506CB/FFFFFF/?text=${company.navn}`} />
 
     <!-- Schema.org for Google -->
     <meta itemprop="name" content={`${company.navn} | ${$page.siteName}`} />
     <meta itemprop="description" content={$_('page.enheter_organisasjonsnummer.description', { companyName: company.navn })} />
-    <meta itemprop="image" content={`https://via.placeholder.com/1200x628/4506CB/FFFFFF/?text=${company.navn}`} />
+    <meta itemprop="image" content={`https://placehold.co/1200x628/4506CB/FFFFFF/?text=${company.navn}`} />
 </svelte:head>
